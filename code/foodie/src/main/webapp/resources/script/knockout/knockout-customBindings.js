@@ -53,12 +53,12 @@ ko.bindingHandlers.starRating = {
 
         //if less than or equal to 1 then use the whole star
         if(num_of_split<=1) {
-            for( i = 1; i <= 5; i++ ) {
+            for( var i = 1; i <= 5; i++ ) {
                 tmp_html += '<input name="'+class_name+'" type="radio" class="' + 
                 class_name + ' star" value="'+ i.toFixed(1)+'"/>';
             }
         }else {  // else use the half star
-            for( i = 0.5; i<=5; i+=0.5 ){
+            for( var i = 0.5; i<=5; i+=0.5 ){
                tmp_html += '<input name="'+class_name+'" type="radio" class="' + 
                class_name + ' star {split:2}" value="'+i.toFixed(1)+'"/>'; 
             }

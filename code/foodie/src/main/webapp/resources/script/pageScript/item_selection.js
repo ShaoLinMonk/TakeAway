@@ -1,9 +1,20 @@
 function renderPage() {
     console.log("Start calling api");   
-    viewModel = new localViewModel();
+    viewModel = new LocalViewModel();
 }
 
-function localViewModel(){	
+function MenuItem(itemName,itemPrice){
+	var self = this;
+	self.itemName = itemName;
+	self.itemPrice = itemPrice;
+	self.quantity = ko.observable(1);
+	self.formattedPrice = ko.computed(function() {
+        var price = self.itemPrice;
+        return "￥" + price.toFixed(2);        
+    });
+}
+
+function LocalViewModel(){	
 	var self = this;
 	
 	self.restaurantInfo = {
@@ -30,25 +41,38 @@ function localViewModel(){
 		return self.restaurantInfo.location.city + self.restaurantInfo.location.address1 + self.restaurantInfo.location.address2;
 	});
 
-	var mealData=[
-		{ "itemName":"咸鱼酱焖茄瓜", "itemPrice": "32.80"}, 
-		{ "itemName":"段氏烧茄子", "itemPrice": "32.80"},
-		{ "itemName":"招牌虾饺皇", "itemPrice": "23.80"},
-		{ "itemName":"豉汁蒸凤爪", "itemPrice": "16.80"},
-		{ "itemName":"鲜虾烧麦", "itemPrice": "18.80"},
-		{ "itemName":"千层榴莲酥", "itemPrice": "16.80"},
-		{ "itemName":"芦蒿炒香干", "itemPrice": "35.60"},
-		{ "itemName":"黄汤菜尖", "itemPrice": "32.80"},
-		{ "itemName":"蟹粉狮子头", "itemPrice": "25.80"},
-		{ "itemName":"百叶结红烧肉", "itemPrice": "49.80"},
-		{ "itemName":"菠萝咕噜肉", "itemPrice": "38.80"},
-		{ "itemName":"米饭", "itemPrice": "5.00"},
-		{ "itemName":"蜜汁叉烧", "itemPrice": "38.80"},
-		{ "itemName":"酱萝卜条", "itemPrice": "20.80"}
-	];
 	self.menuItems = ko.observableArray([]);
 	self.orderItems = ko.observableArray([]);
-	self.menuItems(mealData);
+	
+
+	self.menuItems.push(new MenuItem("咸鱼酱焖茄瓜",32.80)); 
+	self.menuItems.push(new MenuItem("段氏烧茄子",32.80));
+	self.menuItems.push(new MenuItem("招牌虾饺皇",23.80));
+	self.menuItems.push(new MenuItem("豉汁蒸凤爪",16.80));
+	self.menuItems.push(new MenuItem("鲜虾烧麦",18.80));
+	self.menuItems.push(new MenuItem("千层榴莲酥",16.80));
+	self.menuItems.push(new MenuItem("芦蒿炒香干",35.60));
+	self.menuItems.push(new MenuItem("黄汤菜尖",32.80));
+	self.menuItems.push(new MenuItem("蟹粉狮子头",25.80));
+	self.menuItems.push(new MenuItem("百叶结红烧肉",49.80));
+	self.menuItems.push(new MenuItem("菠萝咕噜肉",38.80));
+	self.menuItems.push(new MenuItem("米饭",5.00));
+	self.menuItems.push(new MenuItem("蜜汁叉烧",38.80));
+	self.menuItems.push(new MenuItem("酱萝卜条",20.80));
+
+
+	self.orderBill = ko.computed(function(){
+		var totalBill = parseFloat(0);
+		for(var i =0; i<self.orderItems().length;i++) {
+			var tmp_price = parseFloat(self.orderItems()[i].itemPrice.toFixed(2));
+			tmp_price *= parseInt(self.orderItems()[i].quantity());
+			totalBill += tmp_price;
+		}
+
+		return '￥'+totalBill.toFixed(2);
+	});
+	self.orderItems.push(new MenuItem("酱萝卜条",20.80));
+	self.orderItems.push(new MenuItem("米饭",5.00));
 
 	self.commentData = ko.observableArray(		
 		[
@@ -73,7 +97,25 @@ function localViewModel(){
 		]
 
 	);
+
+
 	computeAverageScore(self.commentData());
+
+	self.addIntoBasket  = function(menuItem) {
+		var idx = self.orderItems().indexOf(menuItem);
+		if (idx === -1){
+			self.orderItems.push(menuItem);
+		} else{
+			var tmp=parseInt(self.orderItems()[idx].quantity());
+			tmp+=1
+			self.orderItems()[idx].quantity(tmp);
+		}
+		
+
+	};
+	self.removeFromBasket = function(orderItem){
+		self.orderItems.remove(orderItem);
+	}
 	/*
 		
 	//self.getList = function () {
