@@ -47,6 +47,7 @@ function localViewModel(){
 		{ "itemName":"酱萝卜条", "itemPrice": "20.80"}
 	];
 	self.menuItems = ko.observableArray([]);
+	self.orderItems = ko.observableArray([]);
 	self.menuItems(mealData);
 
 	self.commentData = ko.observableArray(		

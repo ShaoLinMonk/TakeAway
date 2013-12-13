@@ -3,10 +3,15 @@
 //in_value: the data to be parsed
 //max_value: the maximum value that the in_value can reach
 //           if greater than max_value then value is set to be zero
-function parseDataIntoNumber(in_value,max_value) {
+function parseDataIntoNumber(in_value,max_value,min_value) {
     // set the default value
     var result = 0;
-
+    if(typeof(max_value)!=typeof(1)) {
+        max_value = 5
+    }
+    if(typeof(min_value)!=typeof(1)) {
+        min_value = 0
+    }
     // check the type if in_value is not a number
     if (typeof(in_value) != typeof(1)) {
         try{
@@ -14,7 +19,7 @@ function parseDataIntoNumber(in_value,max_value) {
             result = parseFloat(in_value);
         }catch(err) {
             //otherwise set the result to 0
-            result = 0;
+            result = min_value;
         }
     }else {
         // if it is already a number
@@ -24,10 +29,10 @@ function parseDataIntoNumber(in_value,max_value) {
     // if the number is greater than max_value
     if (result > max_value) {
         // 0 is set as the return value
-        result = 0;
+        result = min_value;
     }else if (result < 0) {
         // if the number is less than 0 
-        result = 0;
+        result = min_value;
     }
 
     return result;

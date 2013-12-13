@@ -39,7 +39,7 @@
 							<td><p id="rstrnt_name" data-bind="text: restaurantInfo.name"></p></td>
 						</tr>
 						<tr>
-							<td data-bind="starRating: restaurantInfo.score + ' my_rating'">
+							<td data-bind="starRating: restaurantInfo.score + ' my_rating 2'">
 								<p id="rstrnt_score" data-bind="text: restaurantInfo.score"></p>
 							</td>
 						<tr/>
@@ -192,16 +192,16 @@
 							<table class="table table-bordered">
 					 			<tr>
 									<td>味道</td>
-									<td data-bind="starRating: flavor_score+' flavor_rating'+$index()"></td>
+									<td data-bind="starRating: flavor_score+' flavor_rating'+$index()+' 1'"></td>
 									<td rowspan="3" id="average_score"><p data-bind="text: average_score"></p></td>
 								</tr>
 								<tr>
 									<td>分量</td>
-									<td data-bind="starRating: quantity_score+' quantity_rating'+$index()"></td>
+									<td data-bind="starRating: quantity_score+' quantity_rating'+$index()+' 1'"></td>
 								</tr>
 								<tr>
 									<td>速度</td>
-									<td data-bind="starRating: timing_score+' timing_rating'+$index()"></td>
+									<td data-bind="starRating: timing_score+' timing_rating'+$index()+' 1'"></td>
 								</tr>
 							</table>
 						</div>
