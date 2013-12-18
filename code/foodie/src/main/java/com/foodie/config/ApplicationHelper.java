@@ -25,4 +25,5 @@ public final class ApplicationHelper {
     public final static String CST_API_ADDRESS_GET_BY_RESTAURANT_ID = "/address/getAddressByRestaurantId";
     public final static String CST_API_ADDRESS_GET_BY_USER_ID = "/address/getAddressByUserId";
     public final static String CST_API_ADDRESS_SET_ADDRESS = "/address/setAddress";
+    public final static String CST_API_GET_IMAGE_BY_ID = "/getImageById";
 }

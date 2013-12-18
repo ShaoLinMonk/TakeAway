@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.foodie.config.ApplicationHelper;
+import com.foodie.model.Image;
 import com.foodie.model.Location;
 import com.foodie.model.LoginInfo;
 import com.foodie.model.Menu;
@@ -52,6 +53,13 @@ public class ApiController {
     @Autowired
     SessionService sessionService;
 
+    /*
+    @RequestMapping(value=ApplicationHelper.CST_API_GET_IMAGE_BY_ID, method = RequestMethod.GET)
+    @ResponseBody
+    public QueryResult<Image> getImageById(@RequestParam("imageId") Long imageId) {
+        return QueryResult.createFromSuccess(publicAccessService.getImageById(imageId));
+    } */
+    
     @RequestMapping(value = "/order/setOrder", method = RequestMethod.POST)
     @ResponseBody
     public QueryResult<String> setOrder(@RequestParam String sessionId, @RequestBody Order order) {

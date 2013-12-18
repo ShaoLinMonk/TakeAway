@@ -1,5 +1,7 @@
-package com.foodie.model;
+package com.foodie.repository;
 
+import com.foodie.model.Menu;
+import com.foodie.model.MenuItem;
 import com.foodie.repository.MenuDAO;
 import com.foodie.repository.MenuDAOImpl;
 import com.google.appengine.api.datastore.Key;
@@ -9,6 +11,7 @@ import com.google.appengine.tools.development.testing.LocalServiceTestHelper;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -17,7 +20,8 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class MenuDAOTest {
-    private final LocalServiceTestHelper helper = new LocalServiceTestHelper(new LocalDatastoreServiceTestConfig().setApplyAllHighRepJobPolicy());
+    private final LocalServiceTestHelper helper = new LocalServiceTestHelper(
+    		new LocalDatastoreServiceTestConfig().setApplyAllHighRepJobPolicy());
 
     private final BigDecimal testValue1 = new BigDecimal(1.1);
     private final BigDecimal testValue2 = new BigDecimal(2.0);

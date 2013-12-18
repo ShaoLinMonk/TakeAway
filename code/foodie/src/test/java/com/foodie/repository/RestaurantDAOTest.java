@@ -1,4 +1,4 @@
-package com.foodie.model;
+package com.foodie.repository;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -9,6 +9,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import com.foodie.model.Location;
+import com.foodie.model.Menu;
+import com.foodie.model.MenuItem;
+import com.foodie.model.Restaurant;
 import com.foodie.repository.MenuDAO;
 import com.foodie.repository.MenuDAOImpl;
 import com.foodie.repository.RestaurantDAO;

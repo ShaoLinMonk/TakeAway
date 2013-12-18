@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.foodie.config.ApplicationHelper;
+import com.foodie.model.Image;
 import com.foodie.model.Location;
 import com.foodie.model.LoginInfo;
 import com.foodie.model.Menu;
@@ -13,6 +14,7 @@ import com.foodie.model.MenuItem;
 import com.foodie.model.Restaurant;
 import com.foodie.model.User;
 import com.foodie.model.session.Session;
+import com.foodie.repository.ImageDAO;
 import com.foodie.repository.MenuDAO;
 import com.foodie.repository.RestaurantDAO;
 import com.foodie.repository.SessionDAO;
@@ -29,9 +31,11 @@ public class PublicAccessService extends AbstractService {
     private SessionDAO sessionDAO;
     @Autowired
     private UserDAO userDAO;
-
     @Autowired
     private RestaurantDAO restaurantDAO;
+    
+    @Autowired
+    private ImageDAO imageDAO;
 
     // TODO: to be finished
     public List<Restaurant> getRestaurant(Location location, int bufferSize) throws NullPointerException {
@@ -100,5 +104,13 @@ public class PublicAccessService extends AbstractService {
         session.setUserId(KeyFactory.keyToString(user.getUserId()));
         sessionDAO.persist(session);
         return KeyFactory.keyToString(user.getUserId());
+    }
+    
+    public Image getImageById(Long imageId) throws NullPointerException {
+    	Image image = imageDAO.getImageById(imageId);
+    	if (image == null) {
+    		this.throwException(new NullPointerException(ApplicationHelper.NULL_POINTER_EXCEPTION_MSG));
+    	}
+    	return image;
     }
 }

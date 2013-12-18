@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import java.util.List;
 
+//TODO: hard-coded test string 
 public class AddressDAOTest extends BaseTest {
     private AddressDAO addressDAO = new AddressDAOImpl();
 
